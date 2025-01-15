@@ -8,6 +8,7 @@ screen.title("word game")
 screen.geometry("468x837")
 image=Image.open("christmas1.PNG")
 image=ImageTk.PhotoImage(image)
+score=0
 imageLabel=Label(screen,image=image)
 imageLabel.place(relwidth=1,relheight=1)
 title=Label(screen,text="Jumbled word game  -christmas edition-",bg="plum1",fg="SpringGreen2",font=("Brush Script",19))
@@ -27,15 +28,20 @@ def reset():
     guess.delete(0,END)
 def check():
     global number
+    global score
     user_guess=guess.get()
     if  user_guess==good[number]:
         messagebox.showinfo("yay!!🙌","you got the correct answer!!!✔🍒🌸✔")
+        score=score+1
+        amount.config(text=f"score={score}")
         reset()
     else:
         messagebox.showerror("👎❌you got it wrong😭😢💔😥","pleassseeee try again😭😭😭😭💔")
         reset()
 word=Label(screen,text="",fg="green",bg="white",font=("Brush Script",10))
 word.place(x=190,y=190)
+amount=Label(screen,text=f"score={score}",fg="green",bg="plum1",font=("Brush Script",10))
+amount.place(x=300,y=50)
 Answer=StringVar()
 guess=Entry(screen,font=("Brush Script",14),textvariable=Answer)
 guess.place(x=120,y=220)
